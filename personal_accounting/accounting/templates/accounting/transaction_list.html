@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>لیست تراکنش ها</title>
+</head>
+<body>
+<h1>لیست تراکنش ها</h1>
+<ul>
+    {% for transaction in transactions %}
+    	<h3>{{ transaction.title }} - {{ transaction.amount }}تومان </h3>
+        <p>{{ transaction.description }}</p>
+        <p>تاریخ : {{ transaction.date }}</p>
+
+        {% if transaction.receipt %}
+        	<p>رسید : <a href="{{ transaction.receipt.url }}">دانلود</a></p>
+        {% endif %}
+
+        {% if transaction.image %}
+            <p>تصویر رسید :</p>
+            <img src="{{ transaction.image.url }}" alt="تصویر رسید" width="200">
+        {% endif %}
+        <hr>
+    {% endfor %}
+
+    <a href="{% url 'add_transaction' %}">افزودن تراکنش جدید</a>
+
+</ul>
+</body>
+</html>
